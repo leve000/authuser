@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "ContainingType": "authuserAPI.Controllers.UserController",
+    "Method": "NewUser",
+    "RelativePath": "api/User/newUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newUserDTO",
+        "Type": "authuserAPI.Models.DTOs.NewUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

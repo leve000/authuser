@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
 namespace authuserAPI
@@ -9,8 +10,8 @@ namespace authuserAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.
-
+            builder.Services.AddDbContext<Models.AuthuserContext>(options =>
+                options.UseMySQL(builder.Configuration.GetConnectionString("MySql")));
             // Add services to the container.
 
             builder.Services.AddControllers();

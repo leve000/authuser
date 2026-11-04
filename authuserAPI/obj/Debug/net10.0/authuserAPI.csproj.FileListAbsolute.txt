@@ -138,3 +138,4 @@ C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\authuserAPI\bin\Debug\net10.0\ru
 C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\authuserAPI\bin\Debug\net10.0\runtimes\win-x64\native\krb5_64.dll
 C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\authuserAPI\bin\Debug\net10.0\runtimes\win-x64\native\krbcc64.dll
 C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\authuserAPI\bin\Debug\net10.0\runtimes\win\lib\net10.0\System.Windows.Extensions.dll
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\authuserAPI\obj\Debug\net10.0\authuserAPI.sourcelink.json

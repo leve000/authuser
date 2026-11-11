@@ -14,5 +14,14 @@ namespace authuserAPI.Services
 
             return (hash, salt);
         }
+
+        public bool VerifyPassword(string password, string hash, string salt)
+        {
+            var saltBytes = Convert.FromBase64String(salt);
+            var hmac = new HMACSHA256(saltBytes);
+            var hashBytes = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            string computedHash = Convert.ToBase64String(hashBytes);
+            return computedHash == hash;
+        }
     }
 }

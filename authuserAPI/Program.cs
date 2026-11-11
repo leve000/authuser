@@ -12,6 +12,8 @@ namespace authuserAPI
 
             builder.Services.AddDbContext<Models.AuthuserContext>(options =>
                 options.UseMySQL(builder.Configuration.GetConnectionString("MySql")));
+
+            builder.Services.AddScoped<Services.PasswordHasher>();
             // Add services to the container.
 
             builder.Services.AddControllers();

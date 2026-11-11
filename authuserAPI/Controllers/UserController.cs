@@ -1,5 +1,6 @@
 ﻿using authuserAPI.Models;
 using authuserAPI.Models.DTOs;
+using authuserAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,20 +12,24 @@ namespace authuserAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly AuthuserContext _context;
+        private readonly PasswordHasher _password;
 
-        public UserController(AuthuserContext context)
+        public UserController(AuthuserContext context, PasswordHasher password)
         {
             _context = context;
+            _password = password;
         }
 
         [HttpPost("newUser")]
         public async Task<IActionResult> NewUser([FromBody] NewUserDTO newUserDTO)
         {
+            var (pass, salt) = _password.HashPassword(newUserDTO.Password!);
             var user = new User
             {
                 Name = newUserDTO.Name,
                 Email = newUserDTO.Email,
-                Password = newUserDTO.Password
+                Password = pass,
+                Salt = salt
             };
             if (user is not null)
             {
@@ -74,6 +79,23 @@ namespace authuserAPI.Controllers
                 return StatusCode(200, new { message = "User deleted successfully" });
             }
             return StatusCode(404, new { message = "User not found" });
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
+        {
+           var login = await _context.Users.SingleOrDefaultAsync(u => u.Name == loginDTO.Name);
+            if (login is null)
+            {
+                return StatusCode(404, new { message = "Login failed" });
+            }
+            var isValid = _password.VerifyPassword(
+                loginDTO.Password, login.Password!, login.Salt!);
+            if (!isValid)
+            {
+                return StatusCode(401, new { message = "Invalid credentials" });
+            }
+            return StatusCode(200, new { message = "Login successful", result = login });
         }
     }
 }

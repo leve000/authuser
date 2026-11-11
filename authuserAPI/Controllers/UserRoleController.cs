@@ -28,7 +28,12 @@ namespace authuserAPI.Controllers
                 {
                     return StatusCode(404, new { message = "User or Role not found" });
                 }
-                user.Roles.Add(role);
+
+                bool isCreated = user.Roles.Any(r => r.Id == newUserRoleDTO.RoleId);
+                if (isCreated)
+                {
+                    return StatusCode(400, new { message = "Role already assigned to user" });
+                }
                 await _context.SaveChangesAsync();
                 return StatusCode(200, new { message = "Role assigned successfully", result = user });
 
@@ -37,6 +42,33 @@ namespace authuserAPI.Controllers
             {
                 return BadRequest(exception.Message);
             }
+        }
+
+        [HttpGet("allUsersAllRoles")]
+        public async Task<IActionResult> GetAllUsersAndRoles()
+        {
+            var users = await _context.Users.Include(u => u.Roles).Select(u=>new
+            {
+                Users = u.Name,
+                UserRoles=u.Roles
+            })
+                .ToListAsync();
+            return Ok(users);
+        }
+        [HttpGet("userByIdAndRoles")]
+
+        public async Task<IActionResult> GetUserByIdAndRoles([FromQuery] Guid id)
+        {
+            var user = await _context.Users.Include(u => u.Roles).Select(u => new
+            {
+                Users = u.Name,
+                UserRoles = u.Roles
+            }).SingleOrDefaultAsync(u => u.Users == _context.Users.SingleOrDefault(user => user.Id == id).Name);
+            if (user is not null)
+            {
+                return StatusCode(200, new { message = "User found", result = user });
+            }
+            return StatusCode(404, new { message = "User not found" });
         }
 
     }

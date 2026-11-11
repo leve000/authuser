@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace authuserAPI.Models;
 
@@ -14,6 +15,7 @@ public partial class User
     public string? Password { get; set; }
 
     public DateTime? RegTime { get; set; }
+    [JsonIgnore]
 
     public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
 }

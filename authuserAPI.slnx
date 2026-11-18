@@ -3,4 +3,5 @@
     <File Path=".gitignore" />
   </Folder>
   <Project Path="authuserAPI/authuserAPI.csproj" />
+  <Project Path="idk/idk.csproj" Id="095d341d-1316-457a-a4ab-2b15d8e58ef3" />
 </Solution>

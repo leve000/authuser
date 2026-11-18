@@ -1,0 +1,9 @@
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.csproj.AssemblyReference.cache
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.AssemblyInfoInputs.cache
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.AssemblyInfo.cs
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.csproj.CoreCompileInputs.cache
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Gyurcsaklj\Desktop\2026-27\authuserAPI\idk\obj\Debug\net10.0\idk.sourcelink.json

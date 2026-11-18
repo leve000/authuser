@@ -239,6 +239,66 @@
         }
       }
     },
+    "/api/User/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/Login": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/UserRole/assignRole": {
       "post": {
         "tags": [
@@ -270,10 +330,61 @@
           }
         }
       }
+    },
+    "/api/UserRole/allUsersAllRoles": {
+      "get": {
+        "tags": [
+          "UserRole"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/UserRole/userByIdAndRoles": {
+      "get": {
+        "tags": [
+          "UserRole"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "LoginDTO": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "password": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
       "NewUserDTO": {
         "type": "object",
         "properties": {
@@ -386,18 +497,18 @@
               "string"
             ]
           },
+          "salt": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
           "regTime": {
             "type": [
               "null",
               "string"
             ],
             "format": "date-time"
-          },
-          "roles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Role"
-            }
           }
         }
       }

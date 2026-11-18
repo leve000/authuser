@@ -13,11 +13,13 @@ namespace authuserAPI.Controllers
     {
         private readonly AuthuserContext _context;
         private readonly PasswordHasher _password;
+        private readonly GenerateToken _generateToken;
 
-        public UserController(AuthuserContext context, PasswordHasher password)
+        public UserController(AuthuserContext context, PasswordHasher password, GenerateToken generateToken)
         {
             _context = context;
             _password = password;
+            _generateToken = generateToken;
         }
 
         [HttpPost("newUser")]
@@ -97,6 +99,26 @@ namespace authuserAPI.Controllers
             }
             return StatusCode(200, new { message = "Login successful", result = login });
         }
+
+        [HttpGet("Login")]
+
+        public async Task<IActionResult> Login([FromQuery] string name, [FromQuery] string password)
+        {
+            var login = await _context.Users.SingleOrDefaultAsync(u => u.Name == name);
+            if (login is null)
+            {
+                return StatusCode(404, new { message = "Login failed" });
+            }
+            var isValid = _password.VerifyPassword(
+                password, login.Password!, login.Salt!);
+            if (!isValid)
+            {
+                var newToken = _generateToken.Token(login.Id, login.Email!, login.Roles);
+                return StatusCode(401, new { message = "Invalid credentials", token = newToken });
+            }
+            return StatusCode(200, new { message = "Login successful", result = login });
+        }
+
     }
 }
 
